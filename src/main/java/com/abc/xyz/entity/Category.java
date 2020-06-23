@@ -47,7 +47,7 @@ public class Category {
 	@OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Product> product;
 	
-	public Set<Product> getKhoahoc() {
+	public Set<Product> getProduct() {
 		return product;
 	}
 	

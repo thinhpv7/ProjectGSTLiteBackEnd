@@ -19,15 +19,13 @@ import javax.persistence.Table;
 import com.abc.xyz.entity.*;
 
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "cart")
+public class Cart {
+
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private int ID;
-	
-	@Column(nullable = true)
-	private String description;
 	
 	@Column(nullable = true)
 	private float price;
@@ -36,28 +34,10 @@ public class Product {
 	private String name;
 	
 	@Column(nullable = true)
-	private String product_code;
+	private String quantity;
 	
-	private int CATEGORY_ID;
-	
-	public int getCATEGORY_ID() {
-		return CATEGORY_ID;
-	}
-
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="CATEGORY_ID", insertable=false, updatable=false)
-    private Category category;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "cart_product",
-	        joinColumns = @JoinColumn(name = "product_id"),
-	        inverseJoinColumns = @JoinColumn(name = "cart_id"))
-	private List<Cart> cart;
-
-	public void setCart(List<Cart> cart) {
-		this.cart = cart;
-	}
+	@ManyToMany(mappedBy="cart",fetch = FetchType.EAGER)
+	private List<Product> product;
 
 	public int getID() {
 		return ID;
@@ -65,14 +45,6 @@ public class Product {
 
 	public void setID(int iD) {
 		ID = iD;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public float getPrice() {
@@ -91,20 +63,20 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getProduct_code() {
-		return product_code;
+	public String getQuantity() {
+		return quantity;
 	}
 
-	public void setProduct_code(String product_code) {
-		this.product_code = product_code;
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
-	
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
 
-	public Product() {
-		super();
-	}	
+	public List<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
+	
 }

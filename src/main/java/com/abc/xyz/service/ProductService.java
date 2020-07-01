@@ -49,9 +49,8 @@ public class ProductService {
 	    	cn.setName(product.getName());
 	    	cn.setPrice(product.getPrice());
 	    	cn.setDescription(product.getDescription());
-	    	cn.setCATEGORY_ID(cn.getCATEGORY_ID());
-	    	cn.setImage(cn.getImage());
-	    	cn.setProduct_code(cn.getProduct_code());
+	    	cn.setCATEGORY_ID(product.getCATEGORY_ID());
+	    	cn.setProduct_code(product.getProduct_code());
 	        updatedCN = productRepository.save(cn);
 	     } else {
 	         throw new EntityNotFoundException();

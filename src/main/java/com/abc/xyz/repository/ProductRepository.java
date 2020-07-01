@@ -9,5 +9,5 @@ import com.abc.xyz.entity.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>{
-	Optional<Product> findByName(String name);
+//	Optional<Product> findByName(String name);
 }

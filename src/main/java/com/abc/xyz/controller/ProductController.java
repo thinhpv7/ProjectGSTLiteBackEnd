@@ -42,7 +42,7 @@ public class ProductController {
     }
  
     @RequestMapping(value = "/product", method = RequestMethod.POST)
-    public Product createProduct(@Valid @RequestParam Product product)
+    public Product createProduct(@Valid @RequestBody Product product)
     {
         return productService.createProduct(product);
     }
@@ -53,42 +53,48 @@ public class ProductController {
         return productService.detailProduct(id);
     }
     
-    @PostMapping("/fileupload")
-    public String fileUpload(
-    		@RequestParam("category_id") int CATEGORY_ID,
-    		@RequestParam("description") String description,
-    		@RequestParam("name_product") String name_product,
-    		@RequestParam("price") float price, 
-    		@RequestParam("product_code") String product_code
-    		) {
-        try {
-//            logger.info("Name= " + name);
-//            byte[] image = xxx.getBytes();
-//            Product model = new Product(CATEGORY_ID, description, compressBytes(xxx.getBytes()), name_product, price, product_code, 
-//            		xxx.getContentType(), xxx.getOriginalFilename());
-        	
-//            Product model = new Product(CATEGORY_ID, description, name_product, price, product_code);
-        	Product model = new Product(CATEGORY_ID, description, name_product, price, product_code);
-            int saveImage = productService.saveImage(model);
-            if (saveImage == 1) {
-                return "success";
-            } else {
-                return "error";
-            }
-        } catch (Exception e) {
-//            logger.error("ERROR", e);
-            return "error";
-        }
-    }
+//    @RequestMapping(value = "/product", method = RequestMethod.POST)
+//    public Product createCategory(@Valid @RequestBody Product product)
+//    {
+//        return productService.createProduct(product);
+//    }
+    
+//    @PostMapping("/fileupload")
+//    public String fileUpload(
+//    		@RequestParam("category_id") int CATEGORY_ID,
+//    		@RequestParam("description") String description,
+//    		@RequestParam("name") String name,
+//    		@RequestParam("price") float price, 
+//    		@RequestParam("product_code") String product_code
+//    		) {
+//        try {
+////            logger.info("Name= " + name);
+////            byte[] image = xxx.getBytes();
+////            Product model = new Product(CATEGORY_ID, description, compressBytes(xxx.getBytes()), name_product, price, product_code, 
+////            		xxx.getContentType(), xxx.getOriginalFilename());
+//        	
+////            Product model = new Product(CATEGORY_ID, description, name_product, price, product_code);
+//        	Product model = new Product(CATEGORY_ID, description, name, price, product_code);
+//            int saveImage = productService.saveImage(model);
+//            if (saveImage == 1) {
+//                return "success";
+//            } else {
+//                return "error";
+//            }
+//        } catch (Exception e) {
+////            logger.error("ERROR", e);
+//            return "error";
+//        }
+//    }
     
 //    @GetMapping(path = { "/get/{imageName}" })
-    @RequestMapping(value = "/image/{imageName}", method = RequestMethod.GET)
-    public Product getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
-        Optional<Product> retrievedImage = productRepository.findByName("ionic");
-        Product img = new Product(retrievedImage.get().getName(), retrievedImage.get().getType(),
-        decompressBytes(retrievedImage.get().getImage()));
-        return img;
-    }
+//    @RequestMapping(value = "/image/{imageName}", method = RequestMethod.GET)
+//    public Product getImage(@PathVariable(value = "imageName") String imageName) throws IOException {
+//        Optional<Product> retrievedImage = productRepository.findByName("ionic");
+//        Product img = new Product(retrievedImage.get().getName(), retrievedImage.get().getType(),
+//        decompressBytes(retrievedImage.get().getImage()));
+//        return img;
+//    }
     
     // compress the image bytes before storing it in the database
     public static byte[] compressBytes(byte[] data) {

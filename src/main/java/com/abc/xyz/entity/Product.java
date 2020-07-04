@@ -1,6 +1,7 @@
 package com.abc.xyz.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,6 +53,9 @@ public class Product {
 	
 	private int CATEGORY_ID;
 	
+	
+	
+	
 //	public Product() {
 //		super();
 //	}
@@ -77,7 +81,6 @@ public class Product {
 //        this.product_code = product_code;
 //        this.price = price;
 //        this.description = description;
-//        this.type = type;
 //        this.name = name;    
 //    }
     
@@ -96,7 +99,8 @@ public class Product {
 //        this.price = price;
 //        this.description = description;
 //    }
-	
+
+
 	public int getCATEGORY_ID() {
 		return CATEGORY_ID;
 	}
@@ -131,6 +135,10 @@ public class Product {
 
 
 
+//	@ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="product_id", insertable=false, updatable=false)
+//    private AccountProduct account_product;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="CATEGORY_ID", insertable=false, updatable=false)
     private Category category;
@@ -150,7 +158,27 @@ public class Product {
 //	public void setCart(List<Account> cart) {
 //		this.cart = cart;
 //	}
+	
+	@OneToMany(mappedBy = "product1", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<AccountProduct> account_product;
+	
+//	@OneToMany(mappedBy = "product2", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    private Set<ProductImage> product_image;
+	
+//	public void setProduct_image(Set<ProductImage> product_image) {
+//		this.product_image = product_image;
+//	}
+	
+	@OneToMany(mappedBy = "product_image", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<ImageProduct> image;
 
+	public void setImage(Set<ImageProduct> image) {
+		this.image = image;
+	}
+
+	public void setAccount_product(Set<AccountProduct> account_product) {
+		this.account_product = account_product;
+	}
 
 	public void setAccount(List<Account> account) {
 		this.account = account;
@@ -199,6 +227,11 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+	public Set<ImageProduct> getImage() {
+		return image;
+	}
+	
 
 //	public List<Account> getAccount() {
 //		return account;

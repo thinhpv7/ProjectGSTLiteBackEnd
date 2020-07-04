@@ -1,9 +1,16 @@
 package com.abc.xyz.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -25,6 +32,35 @@ public class AccountProduct {
     @Column(nullable = true)
     private int quantity;
     
+//    private int productId;
+    
+    
+    
+//    private Product product;
+    
+//	public Product getProduct() {
+//		return product;
+//	}
+    
+//    public int getProductId() {
+//		return productId;
+//	}
+
+//	@OneToMany(mappedBy = "account_product", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    private Set<Product> product;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="product_id", insertable=false, updatable=false)
+    private Product product1;
+
+	public Product getProduct1() {
+		return product1;
+	}
+
+//	public void setProduct1(Product product1) {
+//		this.product1 = product1;
+//	}
+
 	public int getQuantity() {
 		return quantity;
 	}

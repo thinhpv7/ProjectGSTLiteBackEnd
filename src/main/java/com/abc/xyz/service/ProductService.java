@@ -28,7 +28,12 @@ public class ProductService {
     }
      
     public Product createProduct(Product product) {
-        return productRepository.save(product);
+    	System.out.print(product.getID());
+    	Product retObject = productRepository.save(product );
+    	productRepository.flush();
+    	System.out.print(retObject.getID());
+    	return retObject;
+//        return productRepository.save(product);
     }
     
     public int saveImage(Product model) {

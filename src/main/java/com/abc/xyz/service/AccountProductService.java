@@ -47,4 +47,24 @@ public class AccountProductService {
        }
        return ResponseEntity.ok().build();
     }
+	
+	public ResponseEntity<Object> deleteProduct(int Id) 
+    {
+      Integer cart = accountProductRepository.deleteProduct(Id);
+      if (cart>0) {
+      	System.out.println("Xoa thanh cong!");
+       } else {
+              throw new EntityNotFoundException();
+       }
+       return ResponseEntity.ok().build();
+    }
+	
+	public List<AccountProduct> getCart(int Id) {
+//      if (cart>0) {
+//      	System.out.println("Xoa thanh cong!");
+//       } else {
+//              throw new EntityNotFoundException();
+//       }
+	   return (List<AccountProduct>) accountProductRepository.getCartProduct(Id);
+    }
 }

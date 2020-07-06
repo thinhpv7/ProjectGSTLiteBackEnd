@@ -1,5 +1,7 @@
 package com.abc.xyz.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -12,11 +14,21 @@ import com.abc.xyz.entity.AccountProduct;
 
 @Repository
 public interface AccountProductRepository extends PagingAndSortingRepository<AccountProduct, Integer>{
+	
+	@Modifying
+	@Transactional
+	@Query("select b from AccountProduct b where b.account_id=:account_id")
+	List<AccountProduct> getCartProduct(@Param("account_id") int account_id);
 
 	@Modifying
 	@Transactional
 	@Query("delete from AccountProduct b where b.account_id=:account_id and b.product_id=:product_id")
 	int deleteCartProduct(@Param("account_id") int account_id, @Param("product_id") int product_id);
+	
+	@Modifying
+	@Transactional
+	@Query("delete from AccountProduct b where b.product_id=:product_id")
+	int deleteProduct(@Param("product_id") int product_id);
 	
 	@Modifying
 	@Transactional

@@ -48,4 +48,16 @@ public class AccountProductController {
     {
 		return accountProductService.deleteCart(id, id2);
     }
+	
+	@RequestMapping(value = "/delete_product/{id}/", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> delelteProduct(@PathVariable(value = "id") int id) 
+    {
+		return accountProductService.deleteProduct(id);
+    }
+	
+	@RequestMapping(value = "/account_product/{id}/", method = RequestMethod.GET)
+    public List<AccountProduct> getCart(@PathVariable(value = "id") int id) 
+    {
+		return accountProductService.getCart(id);
+    }
 }
